@@ -18,12 +18,12 @@ public class IdentifiersMachine {
     public void setIdentifiers(Set<String> identifiers) {
         this.identifiers = identifiers;
     }
-    public Pair<Boolean, Integer>max(String s){
+    public Pair<Boolean, Integer>max(String s, int skip){
         Pair<Boolean, Integer> pair = Pair.of(false, 0);
         pair = new Pair<>(false, 0);
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = skip; i < s.length(); i++) {
             if (identifiers.contains(Character.toString(s.charAt(i)))) {
-                pair = pair.of(true, i + 1);
+                pair = pair.of(true, s.substring(skip, i + 1).length());
             } else {
                 break;
             }

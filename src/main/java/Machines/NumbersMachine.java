@@ -23,7 +23,7 @@ public class NumbersMachine {
         Pair<Boolean, Integer> pair = Pair.of(false,0);
         for (int i = skip; i < s.length(); i++) {
             if (digits.contains(Character.toString(s.charAt(i)))) {
-                pair = pair.of(true, i + 1);
+                pair = pair.of(true, s.substring(skip, i + 1).length());
             } else {
                 break;
             }
