@@ -1,1 +1,11 @@
-public static void main(String[] args) { int a = 3; int b = 5; int c = a + b; }
+int a = 123;
+double b = 2.2e5;
+boolean break = false;
+
+while (b > a && !break) {
+  b = b - a
+  if (b <= 0 && a > 0) {
+    break;
+  }
+  a = a / 15.0;
+}
