@@ -125,7 +125,7 @@ public class FSMGroup {
                 result = Pair.of(results.get(fsm).getKey(), results.get(fsm).getKey()!=0);
                 fsmPair = Pair.of(fsm, result);
             }
-            else if (results.get(fsm) != null && fsm.getPriority() == priority && results.get(fsm).getKey() > result.getKey()) {
+            else if (results.get(fsm) != null && fsm.getPriority() == priority && results.get(fsm).getKey() >= result.getKey()) {
                 priority = fsm.getPriority();
                 result = Pair.of(results.get(fsm).getKey(), results.get(fsm).getKey()!=0);
                 fsmPair = Pair.of(fsm, result);

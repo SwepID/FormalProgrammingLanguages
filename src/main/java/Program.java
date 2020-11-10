@@ -95,6 +95,9 @@ public class Program {
                 Token token = new Token(tokenClass, tokenName);
                 tokenList.add(token);
             }
+            else {
+                break;
+            }
         }
         tokenList.forEach(token -> {
             System.out.println("" + token.getValue() + " --> " + token.getClassName());

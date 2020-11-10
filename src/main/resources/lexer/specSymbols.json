@@ -1,14 +1,19 @@
 [
   {
     "start": ["q0"],
-    "finish": ["q1"],
+    "finish": ["q3"],
     "inputs": {
-      "sign": "[';', '{', '}', '(', ')', '&', '|', '!'].indexOf('x') >= 0"
+      "sign": "[';', '{', '}', '(', ')', '!'].indexOf('x') >= 0",
+      "doubleSign": "['&', '|'].indexOf('x') >=0"
     },
 
     "matrix": {
       "q0": {
-        "sign": ["q1"]
+        "sign": ["q3"],
+        "doubleSign": ["q2"]
+      },
+      "q2": {
+        "doubleSign": ["q3"]
       }
     }
   }
