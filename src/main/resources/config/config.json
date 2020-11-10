@@ -3,7 +3,7 @@
     "path": "src/main/resources/lexer/keyword.json",
     "priority": 3
   },
-  "Id": {
+  "Identifier": {
     "path": "src/main/resources/lexer/id.json",
     "priority": 0
   },

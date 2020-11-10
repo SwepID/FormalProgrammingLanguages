@@ -137,21 +137,19 @@ public class FSM {
     }
 
     public String getInputType(Character character){
+        //System.out.println("'" + character.toString().replace("\\", "\\\\") + "'");
         String outType = null;
         for (var key : inputs.keySet()){
             JexlEngine expressionFactory = new JexlEngine();
             JexlContext context = new MapContext();
-            //System.out.println(inputs.get(key).replaceAll("'x'", "'" + character.toString() + "'").replaceAll("\"", ""));
-           /* System.out.println(inputs.get(key)
-                    .replaceAll("'x'", "'" + character.toString() + "'").replaceAll("\"", "").replaceAll("\n", " "));*/
+            String characterString = "'" + character.toString().replace("\\", "\\\\") + "'";
             org.apache.commons.jexl2.Expression expression = expressionFactory.createExpression(inputs.get(key)
-                    .replaceAll("'x'", "'" + character.toString() + "'").replaceAll("\"", "").replaceAll("\n", " "));
+                    .replace("'x'", characterString).replaceAll("\"", ""));
             boolean result=(Boolean)expression.evaluate(context);
-            //System.out.println(result);
             if (result)
                 outType = key;
-            //System.out.println(outType);
         }
+        //System.out.println(outType);
         return outType;
     }
 }

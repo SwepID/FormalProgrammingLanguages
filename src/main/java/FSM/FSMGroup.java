@@ -121,20 +121,15 @@ public class FSMGroup {
         for (var fsm : results.keySet()){
             //System.out.println("" + fsm.getClassName() + " " + results.get(fsm) + " fsmPriority = " + fsm.getPriority());
             if (results.get(fsm) != null && fsm.getPriority() > priority && results.get(fsm).getKey() != 0){
-                //System.out.println(fsm);
                 priority = fsm.getPriority();
                 result = Pair.of(results.get(fsm).getKey(), results.get(fsm).getKey()!=0);
                 fsmPair = Pair.of(fsm, result);
-                //System.out.println(fsm);
             }
             else if (results.get(fsm) != null && fsm.getPriority() == priority && results.get(fsm).getKey() > result.getKey()) {
                 priority = fsm.getPriority();
                 result = Pair.of(results.get(fsm).getKey(), results.get(fsm).getKey()!=0);
                 fsmPair = Pair.of(fsm, result);
             }
-            /*if (results.get(fsm).getKey() != 0){
-                System.out.println(fsm);
-            }*/
         }
         return fsmPair;
 

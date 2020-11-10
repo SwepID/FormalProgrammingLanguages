@@ -1,13 +1,20 @@
 [
   {
     "start": ["q0"],
-    "finish": ["q1"],
+    "finish": ["q2"],
     "inputs": {
-      "whitespace": "'x' == '\\n' || 'x' == '\\r' || 'x' == '\\t' || 'x' == ' '"
+      "whitespace": "'x' == ' '",
+      "regexChars": "'x' == '\\'",
+      "specChars": "'x' == 'n' || 'x' == 't' || 'x' == 'r'"
     },
     "matrix": {
-      "q0": {"whitespace": ["q1"]},
-      "q1": {"whitespace": ["q1"]}
+      "q0": {
+        "whitespace": ["q2"],
+        "regexChars": ["q1"]
+      },
+      "q1": {
+        "specChars": ["q2"]
+      }
     }
   }
 ]

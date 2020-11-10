@@ -7,6 +7,7 @@ import org.apache.commons.jexl2.JexlContext;
 import org.apache.commons.jexl2.JexlEngine;
 import org.apache.commons.jexl2.MapContext;
 import util.Pair;
+import util.Token;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -17,10 +18,7 @@ import java.util.List;
 
 public class Program {
     public static String readFile(String path) throws IOException {
-        return new String(Files.readAllBytes(Path.of(path))).replace('\r', ' ')
-                .replace('\n', ' ').replaceAll("( )+", " ")
-                .replaceAll(";", " ;").replaceAll("\\(", "( ")
-                .replaceAll("\\)", " )");
+        return new String(Files.readAllBytes(Path.of(path))).replaceAll("\n|\r\n", "\\\\n");
     }
     public static void main(String[] args) throws IOException {
         List<FSM> fsmList = new ArrayList<FSM>();
@@ -77,14 +75,29 @@ public class Program {
         }
         fsmGroup.setFsms(fsmList);
         //fsmList.forEach(System.out::println);
-        System.out.println(readFile("src/main/resources/program.txt"));
-        String[] unrecognizedTokens = readFile("src/main/resources/program.txt").split(" ");
+        /*String[] unrecognizedTokens = readFile("src/main/resources/program.txt").split(" ");
         for (String unrecognizedToken : unrecognizedTokens) {
             Pair<FSM, Pair<Integer, Boolean>> fsmPair = fsmGroup.defineTokens(unrecognizedToken, 0);
             if (fsmPair!= null){
                 System.out.println("" + unrecognizedToken + " --> " + fsmPair.getKey().getClassName() + " priority = " + fsmPair.getKey().getPriority());
             }
+        }*/
+        String input = readFile("src/main/resources/program.txt");
+        System.out.println(input);
+        int skip = 0;
+        List<Token> tokenList = new ArrayList<>();
+        while (skip < input.length()){
+            Pair<FSM, Pair<Integer, Boolean>> fsmPair = fsmGroup.defineTokens(input, skip);
+            if (fsmPair.getValue().getValue().equals(true)){
+                String tokenName = input.substring(skip, skip + fsmPair.getValue().getKey());
+                skip += fsmPair.getValue().getKey();
+                String tokenClass = fsmPair.getKey().getClassName();
+                Token token = new Token(tokenClass, tokenName);
+                tokenList.add(token);
+            }
         }
-        //System.out.println(fsmGroup.defineTokens("15", 0));
+        tokenList.forEach(token -> {
+            System.out.println("" + token.getValue() + " --> " + token.getClassName());
+        });
     }
 }
